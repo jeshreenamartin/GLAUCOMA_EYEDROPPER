@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptiDrop - Smart Glaucoma Treatment</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #1a6fc4 0%, #0c4a8c 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+            color: white;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: #a0d2ff;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-login {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-login:hover {
+            background: white;
+            color: #0c4a8c;
+        }
+        
+        .btn-register {
+            background: white;
+            color: #0c4a8c;
+        }
+        
+        .btn-register:hover {
+            background: #a0d2ff;
+            color: white;
+        }
+        
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 60px 0;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            max-width: 800px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 22px;
+            max-width: 700px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .btn-primary {
+            background: #ff6b6b;
+            color: white;
+            padding: 15px 40px;
+            font-size: 18px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-primary:hover {
+            background: #ff5252;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 80px 0;
+            flex-wrap: wrap;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            width: 300px;
+            text-align: center;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: #a0d2ff;
+        }
+        
+        .feature-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .problem-section {
+            background: white;
+            border-radius: 30px;
+            padding: 60px;
+            margin: 80px 0;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .problem-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            color: #0c4a8c;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .problem-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .problem-text {
+            flex: 1;
+        }
+        
+        .problem-text h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            color: #0c4a8c;
+            margin-bottom: 20px;
+        }
+        
+        .problem-list {
+            list-style: none;
+        }
+        
+        .problem-list li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .problem-list li:before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+        
+        .problem-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .problem-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .solution-section {
+            color: white;
+            text-align: center;
+            padding: 60px 0;
+        }
+        
+        .solution-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .solution-section p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+        
+        .solution-image {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .solution-image img {
+            width: 100%;
+            display: block;
+        }
+        
+        .auth-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            margin: 50px auto;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .auth-container h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #0c4a8c;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #0c4a8c;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            border-color: #1a6fc4;
+            outline: none;
+        }
+        
+        .auth-submit {
+            width: 100%;
+            padding: 15px;
+            background: #1a6fc4;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .auth-submit:hover {
+            background: #0c4a8c;
+        }
+        
+        .auth-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #0c4a8c;
+        }
+        
+        .auth-link a {
+            color: #1a6fc4;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .auth-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .dashboard {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px auto;
+            max-width: 1000px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .dashboard-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #0c4a8c;
+            font-size: 32px;
+        }
+        
+        .dashboard-nav {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .dashboard-nav a {
+            padding: 12px 25px;
+            background: #e8f1ff;
+            color: #0c4a8c;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .dashboard-nav a:hover, .dashboard-nav a.active {
+            background: #0c4a8c;
+            color: white;
+        }
+        
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .dashboard-card {
+            background: #f8faff;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .dashboard-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #0c4a8c;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        .chatbot-container {
+            background: #e8f1ff;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .chatbot-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .chatbot-header h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #0c4a8c;
+            margin: 0;
+        }
+        
+        .chatbot-messages {
+            height: 300px;
+            overflow-y: auto;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .message {
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            max-width: 80%;
+        }
+        
+        .message.user {
+            background: #1a6fc4;
+            color: white;
+            margin-left: auto;
+        }
+        
+        .message.bot {
+            background: #e8f1ff;
+            color: #0c4a8c;
+        }
+        
+        .chatbot-input {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        
+        .chatbot-input button {
+            padding: 15px 25px;
+            background: #1a6fc4;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .video-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 800px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .video-container h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #0c4a8c;
+            margin-bottom: 20px;
+        }
+        
+        .video-feed {
+            width: 100%;
+            max-width: 640px;
+            border: 2px solid #0c4a8c;
+            border-radius: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: white;
+            margin-top: 80px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            font-size: 24px;
+        }
+        
+        @media (max-width: 768px) {
+            .problem-content {
+                flex-direction: column;
+            }
+            
+            .dashboard-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Main App Component
+        function App() {
+            const [currentPage, setCurrentPage] = useState('home');
+            const [isLoggedIn, setIsLoggedIn] = useState(false);
+            const [user, setUser] = useState(null);
+
+            // Check if user is already logged in (from session)
+            useEffect(() => {
+                // In a real app, you would check with your backend
+                const checkAuthStatus = async () => {
+                    try {
+                        // This would be an API call to your Flask backend
+                        // const response = await fetch('/check-auth');
+                        // const data = await response.json();
+                        // if (data.loggedIn) {
+                        //     setIsLoggedIn(true);
+                        //     setUser({ username: data.username });
+                        // }
+                    } catch (error) {
+                        console.error('Auth check failed:', error);
+                    }
+                };
+                
+                checkAuthStatus();
+            }, []);
+
+            // Handle navigation
+            const navigateTo = (page) => {
+                setCurrentPage(page);
+            };
+
+            // Handle login
+            const handleLogin = (userData) => {
+                setIsLoggedIn(true);
+                setUser(userData);
+                setCurrentPage('dashboard');
+            };
+
+            // Handle logout
+            const handleLogout = () => {
+                // Call logout endpoint
+                fetch('/logout')
+                    .then(() => {
+                        setIsLoggedIn(false);
+                        setUser(null);
+                        setCurrentPage('home');
+                    })
+                    .catch(error => console.error('Logout error:', error));
+            };
+
+            // Render the appropriate page based on state
+            const renderPage = () => {
+                switch(currentPage) {
+                    case 'home':
+                        return <HomePage navigateTo={navigateTo} isLoggedIn={isLoggedIn} />;
+                    case 'login':
+                        return <LoginPage navigateTo={navigateTo} onLogin={handleLogin} />;
+                    case 'register':
+                        return <RegisterPage navigateTo={navigateTo} />;
+                    case 'dashboard':
+                        return isLoggedIn ? <DashboardPage user={user} onLogout={handleLogout} /> : <LoginPage navigateTo={navigateTo} onLogin={handleLogin} />;
+                    case 'eye-drop':
+                        return isLoggedIn ? <EyeDropPage user={user} /> : <LoginPage navigateTo={navigateTo} onLogin={handleLogin} />;
+                    default:
+                        return <HomePage navigateTo={navigateTo} isLoggedIn={isLoggedIn} />;
+                }
+            };
+
+            return (
+                <div className="container">
+                    <Header 
+                        navigateTo={navigateTo} 
+                        isLoggedIn={isLoggedIn} 
+                        onLogout={handleLogout} 
+                        currentPage={currentPage}
+                    />
+                    {renderPage()}
+                    {currentPage !== 'dashboard' && currentPage !== 'eye-drop' && <Footer />}
+                </div>
+            );
+        }
+
+        // Header Component
+        function Header({ navigateTo, isLoggedIn, onLogout, currentPage }) {
+            return (
+                <header>
+                    <div className="logo" onClick={() => navigateTo('home')} style={{cursor: 'pointer'}}>
+                        <i className="fas fa-tint" style={{fontSize: '40px', color: 'white'}}></i>
+                        <div className="logo-text">OptiDrop</div>
+                    </div>
+                    <nav>
+                        <ul>
+                            <li><a href="#" onClick={() => navigateTo('home')}>Home</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Technology</a></li>
+                            <li><a href="#">Contact</a></li>
+                            {isLoggedIn && (
+                                <li><a href="#" onClick={() => navigateTo('eye-drop')}>Eye Drop App</a></li>
+                            )}
+                        </ul>
+                    </nav>
+                    {isLoggedIn ? (
+                        <div className="auth-buttons">
+                            <button className="btn btn-login" onClick={onLogout}>Logout</button>
+                        </div>
+                    ) : (
+                        <div className="auth-buttons">
+                            <button className="btn btn-login" onClick={() => navigateTo('login')}>Login</button>
+                            <button className="btn btn-register" onClick={() => navigateTo('register')}>Register</button>
+                        </div>
+                    )}
+                </header>
+            );
+        }
+
+        // Home Page Component
+        function HomePage({ navigateTo, isLoggedIn }) {
+            return (
+                <div>
+                    <div className="hero">
+                        <h1>Revolutionizing Glaucoma Treatment with Smart Eye Drop Technology</h1>
+                        <p>Precision dosing, reduced waste, and improved patient comfort</p>
+                        {!isLoggedIn && (
+                            <button className="btn btn-primary" onClick={() => navigateTo('register')}>
+                                Get Started Today
+                            </button>
+                        )}
+                    </div>
+
+                    <div className="features">
+                        <div className="feature-card">
+                            <div className="feature-icon">
+                                <i className="fas fa-syringe"></i>
+                            </div>
+                            <h3>Precision Dosing</h3>
+                            <p>Our smart applicator delivers exact medication amounts every time</p>
+                        </div>
+                        <div className="feature-card">
+                            <div className="feature-icon">
+                                <i className="fas fa-piggy-bank"></i>
+                            </div>
+                            <h3>Reduce Waste</h3>
+                            <p>Save up to 30% on medication costs with optimized delivery</p>
+                        </div>
+                        <div className="feature-card">
+                            <div className="feature-icon">
+                                <i className="fas fa-user-md"></i>
+                            </div>
+                            <h3>Better Outcomes</h3>
+                            <p>Improved adherence leads to more effective treatment</p>
+                        </div>
+                    </div>
+
+                    <div className="problem-section">
+                        <h2>The Problem with Current Eye Drop Applicators</h2>
+                        <div className="problem-content">
+                            <div className="problem-text">
+                                <h3>Challenges in Glaucoma Treatment</h3>
+                                <ul className="problem-list">
+                                    <li>Medication wastage due to imprecise application</li>
+                                    <li>Inaccurate dosing leading to ineffective treatment</li>
+                                    <li>Patient discomfort and difficulty self-administering</li>
+                                    <li>High overall treatment costs</li>
+                                    <li>Poor adherence to treatment regimens</li>
+                                </ul>
+                            </div>
+                            <div className="problem-image">
+                                <img src="https://images.unsplash.com/photo-1585435557343-3b092031d5b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Problem illustration" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="solution-section">
+                        <h2>Our Innovative Solution</h2>
+                        <p>OptiDrop's smart delivery system uses precision technology to optimize medication efficiency, improve patient adherence, and reduce treatment costs.</p>
+                        <div className="solution-image">
+                            <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="OptiDrop solution" />
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Login Page Component
+        function LoginPage({ navigateTo, onLogin }) {
+            const [formData, setFormData] = useState({
+                username: '',
+                password: ''
+            });
+            const [error, setError] = useState('');
+
+            const handleChange = (e) => {
+                setFormData({
+                    ...formData,
+                    [e.target.name]: e.target.value
+                });
+            };
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                setError('');
+                
+                // Send login request to backend
+                fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `username=${encodeURIComponent(formData.username)}&password=${encodeURIComponent(formData.password)}`
+                })
+                .then(response => {
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                    } else {
+                        return response.text();
+                    }
+                })
+                .then(data => {
+                    if (data === 'Invalid credentials') {
+                        setError('Invalid username or password');
+                    } else if (data) {
+                        onLogin({ username: formData.username });
+                    }
+                })
+                .catch(error => {
+                    console.error('Login error:', error);
+                    setError('Login failed. Please try again.');
+                });
+            };
+
+            return (
+                <div className="auth-container">
+                    <h2>Login to Your Account</h2>
+                    {error && <div style={{color: 'red', marginBottom: '15px'}}>{error}</div>}
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="username">Username</label>
+                            <input 
+                                type="text" 
+                                id="username" 
+                                name="username" 
+                                value={formData.username}
+                                onChange={handleChange}
+                                required 
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="password">Password</label>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                value={formData.password}
+                                onChange={handleChange}
+                                required 
+                            />
+                        </div>
+                        <button type="submit" className="auth-submit">Login</button>
+                    </form>
+                    <div className="auth-link">
+                        Don't have an account? <a href="#" onClick={() => navigateTo('register')}>Register here</a>
+                    </div>
+                </div>
+            );
+        }
+
+        // Register Page Component
+        function RegisterPage({ navigateTo }) {
+            const [formData, setFormData] = useState({
+                username: '',
+                password: '',
+                confirmPassword: ''
+            });
+            const [error, setError] = useState('');
+
+            const handleChange = (e) => {
+                setFormData({
+                    ...formData,
+                    [e.target.name]: e.target.value
+                });
+            };
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                
+                if (formData.password !== formData.confirmPassword) {
+                    setError('Passwords do not match');
+                    return;
+                }
+                
+                setError('');
+                
+                // Send registration request to backend
+                fetch('/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `username=${encodeURIComponent(formData.username)}&password=${encodeURIComponent(formData.password)}`
+                })
+                .then(response => {
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                    } else {
+                        return response.text();
+                    }
+                })
+                .then(data => {
+                    if (data === 'Username already exists!') {
+                        setError('Username already exists');
+                    } else if (!response.redirected) {
+                        navigateTo('login');
+                    }
+                })
+                .catch(error => {
+                    console.error('Registration error:', error);
+                    setError('Registration failed. Please try again.');
+                });
+            };
+
+            return (
+                <div className="auth-container">
+                    <h2>Create an Account</h2>
+                    {error && <div style={{color: 'red', marginBottom: '15px'}}>{error}</div>}
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="username">Username</label>
+                            <input 
+                                type="text" 
+                                id="username" 
+                                name="username" 
+                                value={formData.username}
+                                onChange={handleChange}
+                                required 
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="password">Password</label>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                value={formData.password}
+                                onChange={handleChange}
+                                required 
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="confirmPassword">Confirm Password</label>
+                            <input 
+                                type="password" 
+                                id="confirmPassword" 
+                                name="confirmPassword" 
+                                value={formData.confirmPassword}
+                                onChange={handleChange}
+                                required 
+                            />
+                        </div>
+                        <button type="submit" className="auth-submit">Register</button>
+                    </form>
+                    <div className="auth-link">
+                        Already have an account? <a href="#" onClick={() => navigateTo('login')}>Login here</a>
+                    </div>
+                </div>
+            );
+        }
+
+        // Dashboard Page Component
+        function DashboardPage({ user, onLogout }) {
+            const [activeTab, setActiveTab] = useState('overview');
+            const [messages, setMessages] = useState([
+                { text: "Hello! I'm your OptiDrop assistant. How can I help you today?", sender: "bot" }
+            ]);
+            const [inputMessage, setInputMessage] = useState('');
+
+            const handleSendMessage = (e) => {
+                e.preventDefault();
+                if (inputMessage.trim() === '') return;
+
+                // Add user message
+                setMessages([...messages, { text: inputMessage, sender: "user" }]);
+                
+                // Simulate bot response
+                setTimeout(() => {
+                    setMessages(prev => [...prev, { text: "I understand you're interested in our smart eye drop technology. Our system helps ensure precise dosing and reduces medication waste. Would you like to know more about how it works?", sender: "bot" }]);
+                }, 1000);
+                
+                setInputMessage('');
+            };
+
+            return (
+                <div className="dashboard">
+                    <div className="dashboard-header">
+                        <h2>Welcome, {user?.username}!</h2>
+                        <button className="btn btn-login" onClick={onLogout}>Logout</button>
+                    </div>
+
+                    <div className="dashboard-nav">
+                        <a href="#" className={activeTab === 'overview' ? 'active' : ''} onClick={() => setActiveTab('overview')}>Overview</a>
+                        <a href="#" className={activeTab === 'usage' ? 'active' : ''} onClick={() => setActiveTab('usage')}>Usage Analytics</a>
+                        <a href="#" className={activeTab === 'settings' ? 'active' : ''} onClick={() => setActiveTab('settings')}>Device Settings</a>
+                        <a href="#" className={activeTab === 'support' ? 'active' : ''} onClick={() => setActiveTab('support')}>Support</a>
+                    </div>
+
+                    <div className="dashboard-content">
+                        <div className="dashboard-card">
+                            <h3>Medication Usage</h3>
+                            <p>Your medication adherence: <strong>92%</strong></p>
+                            <p>Last application: <strong>Today, 8:30 AM</strong></p>
+                            <p>Next scheduled: <strong>Tomorrow, 8:30 AM</strong></p>
+                        </div>
+                        <div className="dashboard-card">
+                            <h3>Device Status</h3>
+                            <p>Battery level: <strong>85%</strong></p>
+                            <p>Connected: <strong>Yes</strong></p>
+                            <p>Medication level: <strong>60%</strong></p>
+                        </div>
+                        <div className="dashboard-card">
+                            <h3>Recent Alerts</h3>
+                            <p>No recent alerts</p>
+                            <p>Your device is functioning normally</p>
+                        </div>
+                        <div className="dashboard-card">
+                            <h3>Monthly Report</h3>
+                            <p>Medication saved: <strong>22%</strong></p>
+                            <p>Estimated annual savings: <strong>$245</strong></p>
+                        </div>
+                    </div>
+
+                    <div className="chatbot-container">
+                        <div className="chatbot-header">
+                            <i className="fas fa-robot" style={{fontSize: '30px', color: '#0c4a8c'}}></i>
+                            <h3>OptiDrop Assistant</h3>
+                        </div>
+                        <div className="chatbot-messages">
+                            {messages.map((msg, index) => (
+                                <div key={index} className={`message ${msg.sender}`}>
+                                    {msg.text}
+                                </div>
+                            ))}
+                        </div>
+                        <form onSubmit={handleSendMessage} className="chatbot-input">
+                            <input 
+                                type="text" 
+                                value={inputMessage}
+                                onChange={(e) => setInputMessage(e.target.value)}
+                                placeholder="Type your message here..." 
+                            />
+                            <button type="submit">Send</button>
+                        </form>
+                    </div>
+                </div>
+            );
+        }
+
+        // Eye Drop Application Page
+        function EyeDropPage({ user }) {
+            return (
+                <div className="video-container">
+                    <h2>Smart Eye Drop Application</h2>
+                    <p>Position your eye in front of the camera and move the dropper to the target</p>
+                    <img src="/video_feed" className="video-feed" alt="Video feed" />
+                    <div style={{marginTop: '20px'}}>
+                        <button className="btn btn-primary">Start Application</button>
+                    </div>
+                </div>
+            );
+        }
+
+        // Footer Component
+        function Footer() {
+            return (
+                <footer>
+                    <div className="logo" style={{justifyContent: 'center', marginBottom: '20px'}}>
+                        <i className="fas fa-tint" style={{fontSize: '30px', color: 'white'}}></i>
+                        <div className="logo-text">OptiDrop</div>
+                    </div>
+                    <p>Revolutionizing glaucoma treatment through innovative technology</p>
+                    
+                    <div className="footer-links">
+                        <a href="#">About Us</a>
+                        <a href="#">Technology</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Contact</a>
+                    </div>
+                    
+                    <div className="social-icons">
+                        <a href="#"><i className="fab fa-facebook"></i></a>
+                        <a href="#"><i className="fab fa-twitter"></i></a>
+                        <a href="#"><i className="fab fa-instagram"></i></a>
+                        <a href="#"><i className="fab fa-linkedin"></i></a>
+                    </div>
+                    
+                    <p>&copy; 2023 OptiDrop. All rights reserved.</p>
+                </footer>
+            );
+        }
+
+        // Render the App
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
