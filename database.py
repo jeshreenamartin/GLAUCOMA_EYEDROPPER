@@ -1,6 +1,12 @@
 import sqlite3
+import os
 
 def init_db():
+    # Ensure the database directory exists
+    db_dir = os.path.dirname(os.path.abspath("eyedrop.db"))
+    if not os.path.exists(db_dir):
+        os.makedirs(db_dir)
+    
     conn = sqlite3.connect("eyedrop.db")
     cur = conn.cursor()
 
